@@ -8,8 +8,8 @@ import br.com.igor.app.Objetos.x;
 
 public class Main {
     public static void main(String[] args) {
-    input a = new input();
-    a.atomicCreate();
-        
+        input a = new input();
+        a.atomicCreate();
+
     }
 }
