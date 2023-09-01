@@ -1,8 +1,8 @@
 package br.com.igor.app.Objetos;
 
-public class x extends regras {
+public class fx extends regras {
 
-    public x(String value){
+    public fx(String value){
         super(value);
     }
 }
