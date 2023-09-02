@@ -13,6 +13,16 @@ public class resolving {
 
     private Double sigmaXvSigmaY = 0.0;
 
+    public void atomicCreate(List<Double> listX, List<Double> listY){
+        simpleSumXOrFx(listX,'X');
+        simpleSumXOrFx(listY,'Y');
+        sumWithPowXOrFx(listX, 'X');
+        xXFx(listX, listY);
+        applyingTheMathematicalFormulaAndShow(listX);
+        
+
+    }
+
     public void simpleSumXOrFx(List<Double> list,char xOrFx){
     for (Double num: list) {
         if(xOrFx == 'X'){
@@ -41,5 +51,22 @@ public class resolving {
             sigmaXvSigmaY += lX * listY.get(i);
             i++;
         }
+    }
+
+    public void applyingTheMathematicalFormulaAndShow(List<Double> listX){
+        double a = (sigmaX * sigmaXvSigmaY - sigmaXPow * sigmaY)/(Math.pow(sigmaX, 2) - listX.size() * sigmaXPow);
+        double b = (sigmaX * sigmaY - listX.size() * sigmaXvSigmaY)/(Math.pow(sigmaX, 2) - listX.size() * sigmaXPow);
+/*
+ * 
+ System.out.println("a = " + a
+ + "b = " + b
+ + "\nx(k) = " + sigmaX 
+ + "\nf(x) = " + sigmaY
+ + "\nf(x).x(k) = " + sigmaXvSigmaY
+ + "\nx(k)^2 = " + sigmaXPow);
+ */
+
+        System.out.println("g(x) = " + String.format("%.4f", a) + " " + String.format("%.4f", b) + "x");
+
     }
 }
