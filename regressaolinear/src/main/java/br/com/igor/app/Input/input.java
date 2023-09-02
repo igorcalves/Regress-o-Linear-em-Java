@@ -35,21 +35,35 @@ public class input {
     }
 
     public void addValuesInListY() {
+        int cont = 0;
         fx valueOfX = new fx("");
+        System.out.println("f(x) deve conter " + listX.size() + " valores");
         System.out.print("Digite o valor de (Y) ou 'proximo' para encerrar: ");
-        while (!valueOfX.atribuirValor(sc.nextLine(), 'Y')) {
+        while (true) {
+            if(cont== listX.size()) break;
+            valueOfX.atribuirValor(sc.nextLine(), 'Y');
             if (valueOfX.getDoubleValue() != null) {
                 listY.add(valueOfX.getDoubleValue());
             }
             valueOfX = new fx("");
+            cont ++;
         }
     }
 
     public void showListx() {
         int i = 0;
+        System.out.println("\nx            y");
         for (Double x : listX) {
-            System.out.println(x + "  " + listY.get(i));
+            System.out.println( +x + "       " + listY.get(i));
             i++;
         }
+    }
+
+    public List<Double> getListX() {
+        return listX;
+    }
+    
+    public List<Double> getListY() {
+        return listY;
     }
 }

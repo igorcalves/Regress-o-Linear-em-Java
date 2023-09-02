@@ -25,7 +25,7 @@ public abstract class regras {
             return false;
         }
         this.value = value;
-        System.out.print(
+            System.out.print(
                 "Digite o valor de (" + parameter + ") ou 'proximo' para digitar o proximo parametro ou encerrar: ");
         return false;
     }
