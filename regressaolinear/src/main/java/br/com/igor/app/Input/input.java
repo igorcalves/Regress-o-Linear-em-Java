@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import br.com.igor.app.Mocks.lists;
 import br.com.igor.app.Objetos.fx;
 import br.com.igor.app.Objetos.x;
 import br.com.igor.app.RegressaoLinear.resolving;
