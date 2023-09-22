@@ -11,6 +11,16 @@ public class Resolving {
     private valorLagrange vl;
 
     private List<valorLagrange> lagranges = listLagrange.lagranges;
+    private List<valorLagrange> ln = new ArrayList<>();
+
+    public void run(valorLagrange v1, valorLagrange v2, valorLagrange v3){
+        multplyXWithTwo(v1, v2);
+        sameXType();
+        listLagrange.list();
+        if(v3 != null){
+            multplyXWithThree(v3);
+        }
+    }
 
     public void multplyXWithTwo(valorLagrange v1, valorLagrange v2) {
         // primeira distributiva (x) * (x)
@@ -25,6 +35,29 @@ public class Resolving {
         // quarta distributiva (n) * (n)
         vl = new valorLagrange(v1.getValor() * v2.getValor(), 0);
         listLagrange.lagranges.add(vl);
+    }
+
+    public void multplyXWithThree(valorLagrange v3){
+        // primeira distributiva (x) * (x)
+        vl = new valorLagrange(1,lagranges.get(0).getX() + v3.getX());
+        ln.add(vl);
+        // segunda distributiva (x) * (n)
+        vl = new valorLagrange(v3.getValor(),lagranges.get(0).getX());
+        ln.add(vl);
+        // terceira distributiva (n) * (x)
+        vl = new valorLagrange(lagranges.get(1).getValor(), lagranges.get(1).getX() + v3.getX());
+        ln.add(vl);
+        //quarta distributica (n) * (n)
+        vl = new valorLagrange(lagranges.get(1).getValor() * v3.getValor(),lagranges.get(1).getX());
+        ln.add(vl);
+        // quinta distributiva (n) * (x)
+        vl = new valorLagrange(lagranges.get(2).getValor(), lagranges.get(2).getX() + v3.getX());
+        ln.add(vl);
+        //sexta distributiva(n) * (n)
+        vl = new valorLagrange(lagranges.get(2).getValor() * v3.getValor(),lagranges.get(2).getX());
+        ln.add(vl);
+        System.out.println(ln);
+
     }
 
     public void sameXType() {
