@@ -19,7 +19,7 @@ public class Main {
         vl.add(v3);
 
         Resolving rs = new Resolving();
-        rs.run(v1, v2, null);
+        rs.run(v1, v2, v3);
 
         /*
          * verificar uma forma de remover um valor de um array enquanto itera sobre ele
