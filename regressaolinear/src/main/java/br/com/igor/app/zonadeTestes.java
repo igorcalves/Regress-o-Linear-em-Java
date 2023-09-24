@@ -2,26 +2,25 @@ package br.com.igor.app;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+
+import br.com.igor.app.Lagrange.Resolving;
+import br.com.igor.app.Objetos.valorLagrange;
+import br.com.igor.app.RegressaoLinear.resolving;
 
 public class zonadeTestes {
     public static void main(String[] args) {
-        List<String> nomes = new ArrayList<>();
 
-        nomes.add("a");
-        nomes.add("b");
-        nomes.add("c");
-        nomes.add("d");
-        nomes.add("f");
-        nomes.add("g");
-        nomes.add("h");
-        nomes.add("i");
-        String a = "";
-        for (String string : nomes) {
-            a += string;
-        }
-        nomes.clear();
-        nomes.add(a);
-        System.out.println(nomes);
+        Resolving rs = new Resolving();
+        List<valorLagrange> vl = new ArrayList<>();
+
+        vl.add(new valorLagrange(1, 2));
+        vl.add(new valorLagrange(1, 2));
+        vl.add(new valorLagrange(1, 3));
+        vl.add(new valorLagrange(1, 3));
+        vl.add(new valorLagrange(1, 4));
+        vl.add(new valorLagrange(1, 4));
+        vl.add(new valorLagrange(53, 0));
+        rs.sameXType(vl);
+
     }
 }

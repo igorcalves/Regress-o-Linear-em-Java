@@ -7,21 +7,23 @@ import br.com.igor.app.Mocks.listLagrange;
 import br.com.igor.app.Objetos.valorLagrange;
 
 public class Resolving {
-    private List<Integer> indexForRemove = new ArrayList<>();
+
     private valorLagrange vl;
 
     private List<valorLagrange> lagranges = listLagrange.lagranges;
     private List<valorLagrange> ln = new ArrayList<>();
+    private List<valorLagrange> listaFinal = new ArrayList<>();
 
     private List<valorLagrange> valorFinal = new ArrayList<>();
 
     public void run(valorLagrange v1, valorLagrange v2, valorLagrange v3) {
         multplyXWithTwo(v1, v2);
-        sameXType();
+        listaFinal.add(v1);
+        listaFinal.add(v2);
+
+        System.out.println(listLagrange.lagranges);
+        sameXType(listLagrange.lagranges);
         listLagrange.list();
-        if (v3 != null) {
-            multplyXWithThree(v3);
-        }
     }
 
     public void multplyAll(List<valorLagrange> listOfValue) {
@@ -33,7 +35,7 @@ public class Resolving {
         vl = new valorLagrange(1, v1.getX() + v2.getX());
         listLagrange.lagranges.add(vl);
         // segunda distributiva (x) * (n)
-        vl = new valorLagrange(v2.getValor(), v1.getX());
+        vl = new valorLagrange(v1.getX() * v2.getValor(), v1.getX());
         listLagrange.lagranges.add(vl);
         // terceira distributiva (n) * (x)
         vl = new valorLagrange(v1.getValor(), v1.getX());
@@ -43,30 +45,8 @@ public class Resolving {
         listLagrange.lagranges.add(vl);
     }
 
-    public void multplyXWithThree(valorLagrange v3) {
-        // primeira distributiva (x) * (x)
-        vl = new valorLagrange(1, lagranges.get(0).getX() + v3.getX());
-        ln.add(vl);
-        // segunda distributiva (x) * (n)
-        vl = new valorLagrange(v3.getValor(), lagranges.get(0).getX());
-        ln.add(vl);
-        // terceira distributiva (n) * (x)
-        vl = new valorLagrange(lagranges.get(1).getValor(), lagranges.get(1).getX() + v3.getX());
-        ln.add(vl);
-        // quarta distributica (n) * (n)
-        vl = new valorLagrange(lagranges.get(1).getValor() * v3.getValor(), lagranges.get(1).getX());
-        ln.add(vl);
-        // quinta distributiva (n) * (x)
-        vl = new valorLagrange(lagranges.get(2).getValor(), lagranges.get(2).getX() + v3.getX());
-        ln.add(vl);
-        // sexta distributiva(n) * (n)
-        vl = new valorLagrange(lagranges.get(2).getValor() * v3.getValor(), lagranges.get(2).getX());
-        ln.add(vl);
-        System.out.println(ln);
-
-    }
-
     public void sameXType() {
+        List<Integer> indexForRemove = new ArrayList<>();
         List<valorLagrange> auxLagranges = new ArrayList<>();
         int i = 0;
         int indice = 0;
@@ -84,12 +64,32 @@ public class Resolving {
             }
             indice++;
         }
+    }
 
-        int valor = sumORSub(auxLagranges.get(0).getValor(), auxLagranges.get(1).getValor());
-        listLagrange.lagranges.add(i, new valorLagrange(valor, lagranges.get(i - 1).getX()));
-        listLagrange.lagranges.remove(1);
-        listLagrange.lagranges.remove(1);
+    public void sameXType(List<valorLagrange> listP) {
+        System.out.println("O que entrou = " + listP);
+        int size = listP.size();
 
+        for (int i = 0; i < size; i++) {
+            valorLagrange termoI = listP.get(i);
+
+            if (termoI.getX() != null && termoI.getX() != 0) {
+                for (int j = i + 1; j < size; j++) {
+                    valorLagrange termoJ = listP.get(j);
+
+                    if (termoJ.getX() != null && termoJ.getX() != 0 && termoJ.getX().equals(termoI.getX())) {
+                        int novoValor = termoI.getValor() + termoJ.getValor();
+                        termoI.setValor(novoValor);
+
+                        listP.remove(j);
+                        size--;
+                        j--;
+                    }
+                }
+            }
+        }
+
+        System.out.println("O que saiu = " + listP);
     }
 
     public int sumORSub(int v1, int v2) {
