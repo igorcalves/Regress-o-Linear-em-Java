@@ -5,7 +5,6 @@ import java.util.List;
 
 import br.com.igor.app.Lagrange.Resolving;
 import br.com.igor.app.Objetos.valorLagrange;
-import br.com.igor.app.RegressaoLinear.resolving;
 
 public class zonadeTestes {
     public static void main(String[] args) {
@@ -21,6 +20,5 @@ public class zonadeTestes {
         vl.add(new valorLagrange(1, 4));
         vl.add(new valorLagrange(53, 0));
         rs.sameXType(vl);
-
     }
 }

@@ -10,24 +10,75 @@ public class Resolving {
 
     private valorLagrange vl;
 
-    private List<valorLagrange> lagranges = listLagrange.lagranges;
-    private List<valorLagrange> ln = new ArrayList<>();
-    private List<valorLagrange> listaFinal = new ArrayList<>();
-
-    private List<valorLagrange> valorFinal = new ArrayList<>();
+    private List<valorLagrange> lagranges = new ArrayList<>();
+    private List<valorLagrange> listaFinal;
+    private List<valorLagrange> auxList = new ArrayList<>();
+    valorLagrange v = new valorLagrange(-5, 1);
 
     public void run(valorLagrange v1, valorLagrange v2, valorLagrange v3) {
         multplyXWithTwo(v1, v2);
-        listaFinal.add(v1);
-        listaFinal.add(v2);
-
         System.out.println(listLagrange.lagranges);
         sameXType(listLagrange.lagranges);
-        listLagrange.list();
+        System.out.println(listaFinal);
+        auxList.add(v);
+        multiplyAll(listaFinal, auxList);
     }
 
-    public void multplyAll(List<valorLagrange> listOfValue) {
+    public void multiplyAll(List<valorLagrange> listFinalValues, List<valorLagrange> newValues) {
+        // Crie uma lista para armazenar os resultados
+        List<valorLagrange> results = new ArrayList<>();
+        int mult = 1;
+        int index = newValues.size();
 
+        for (valorLagrange finalValue : listFinalValues) {
+            if (newValues.isEmpty())
+                break;
+            for (valorLagrange newValue : newValues) {
+                System.out.println("valor final = " + finalValue + " new value = " + newValue);
+
+                // (x) * (x)
+                if (finalValue.hasX() && newValue.hasX()) {
+                    int newValueValor = finalValue.getValor() * newValue.getX();
+                    int newValueX = finalValue.getX() + newValue.getX();
+                    results.add(new valorLagrange(newValueValor, newValueX));
+                }
+                // (x) * (n)
+                if (finalValue.hasX() && newValue.getX() == 1) {
+                    if (mult == 1) {
+                        int newValueValor = newValue.getValor();
+                        int newValueX = finalValue.getX();
+                        results.add(new valorLagrange(newValueValor, newValueX));
+                        mult++;
+                    } else {
+                        int newValueValor = finalValue.getValor() * newValue.getValor();
+                        int newValueX = finalValue.getX();
+                        results.add(new valorLagrange(newValueValor, newValueX));
+                        mult = 1;
+                    }
+
+                }
+
+                else if (!finalValue.hasX()) {
+                    // Se finalValue não tem X, adicione-o diretamente aos resultados
+                    results.add(new valorLagrange(finalValue.getValor(), newValue.getX()));
+                }
+
+                else if (!finalValue.hasX() && newValue.hasX()) {
+                    int newValueValor = finalValue.getValor() * newValue.getX();
+                    int newValueX = finalValue.getX() + newValue.getX();
+                    results.add(new valorLagrange(newValueValor, newValueX));
+                }
+            }
+
+        }
+
+        results.add(new valorLagrange(listFinalValues.get((listFinalValues.size() - 1)).getValor()
+                * newValues.get((newValues.size() - 1)).getValor(), 0));
+
+        // Aqui, você pode fazer o que quiser com a lista results, como imprimir ou
+        // armazenar em outra lista.
+        sameXType(results);
+        System.out.println(results);
     }
 
     public void multplyXWithTwo(valorLagrange v1, valorLagrange v2) {
@@ -43,27 +94,6 @@ public class Resolving {
         // quarta distributiva (n) * (n)
         vl = new valorLagrange(v1.getValor() * v2.getValor(), 0);
         listLagrange.lagranges.add(vl);
-    }
-
-    public void sameXType() {
-        List<Integer> indexForRemove = new ArrayList<>();
-        List<valorLagrange> auxLagranges = new ArrayList<>();
-        int i = 0;
-        int indice = 0;
-        for (valorLagrange vl : lagranges) {
-            if (i == lagranges.size())
-                break;
-            if (vl.getX() == listLagrange.lagranges.get(i + 1).getX()) {
-                if (vl.getX() == 0)
-                    ;
-                else {
-                    auxLagranges.add(vl);
-                    indexForRemove.add(indice);
-                }
-                i++;
-            }
-            indice++;
-        }
     }
 
     public void sameXType(List<valorLagrange> listP) {
@@ -90,6 +120,7 @@ public class Resolving {
         }
 
         System.out.println("O que saiu = " + listP);
+        listaFinal = new ArrayList<>(listP);
     }
 
     public int sumORSub(int v1, int v2) {
