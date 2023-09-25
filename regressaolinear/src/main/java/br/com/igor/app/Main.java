@@ -11,8 +11,8 @@ public class Main {
     public static void main(String[] args) {
 
         List<valorLagrange> vl = new ArrayList<>();
-        valorLagrange v1 = new valorLagrange(-4, 1);
-        valorLagrange v2 = new valorLagrange(-3, 1);
+        valorLagrange v1 = new valorLagrange(-10, 1);
+        valorLagrange v2 = new valorLagrange(-13, 1);
         valorLagrange v3 = new valorLagrange(-4, 1);
 
         vl.add(v3);

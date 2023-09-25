@@ -13,29 +13,42 @@ public class Resolving {
     private List<valorLagrange> lagranges = new ArrayList<>();
     private List<valorLagrange> listaFinal;
     private List<valorLagrange> auxList = new ArrayList<>();
-    valorLagrange v = new valorLagrange(-5, 1);
+    valorLagrange v = new valorLagrange(-4, 1);
+    valorLagrange v12 = new valorLagrange(-5, 1);
+    valorLagrange vl3 = new valorLagrange(-6, 1);
+    valorLagrange vl4 = new valorLagrange(-7, 1);
 
     public void run(valorLagrange v1, valorLagrange v2, valorLagrange v3) {
         multplyXWithTwo(v1, v2);
-        System.out.println(listLagrange.lagranges);
         sameXType(listLagrange.lagranges);
+        lagranges.add(v);
+        lagranges.add(v12);
+        lagranges.add(vl3);
+        lagranges.add(vl4);
+        System.out.println("começio " + listaFinal);
+        while (true) {
+            if (lagranges.isEmpty())
+                break;
+            auxList.add(0, lagranges.get(0));
+            lagranges.remove(0);
+            multiplyAll(listaFinal, auxList);
+            auxList.remove(0);
+        }
         System.out.println(listaFinal);
-        auxList.add(v);
-        multiplyAll(listaFinal, auxList);
     }
 
     public void multiplyAll(List<valorLagrange> listFinalValues, List<valorLagrange> newValues) {
-        // Crie uma lista para armazenar os resultados
+        System.out.println(listFinalValues);
+
         List<valorLagrange> results = new ArrayList<>();
         int mult = 1;
-        int index = newValues.size();
+        int index = 0;
 
         for (valorLagrange finalValue : listFinalValues) {
+
             if (newValues.isEmpty())
                 break;
             for (valorLagrange newValue : newValues) {
-                System.out.println("valor final = " + finalValue + " new value = " + newValue);
-
                 // (x) * (x)
                 if (finalValue.hasX() && newValue.hasX()) {
                     int newValueValor = finalValue.getValor() * newValue.getX();
@@ -53,7 +66,6 @@ public class Resolving {
                         int newValueValor = finalValue.getValor() * newValue.getValor();
                         int newValueX = finalValue.getX();
                         results.add(new valorLagrange(newValueValor, newValueX));
-                        mult = 1;
                     }
 
                 }
@@ -68,6 +80,7 @@ public class Resolving {
                     int newValueX = finalValue.getX() + newValue.getX();
                     results.add(new valorLagrange(newValueValor, newValueX));
                 }
+                index++;
             }
 
         }
@@ -78,10 +91,12 @@ public class Resolving {
         // Aqui, você pode fazer o que quiser com a lista results, como imprimir ou
         // armazenar em outra lista.
         sameXType(results);
-        System.out.println(results);
+        listaFinal.clear();
+        listaFinal.addAll(results);
     }
 
     public void multplyXWithTwo(valorLagrange v1, valorLagrange v2) {
+        listaFinal = new ArrayList<>();
         // primeira distributiva (x) * (x)
         vl = new valorLagrange(1, v1.getX() + v2.getX());
         listLagrange.lagranges.add(vl);
@@ -94,10 +109,11 @@ public class Resolving {
         // quarta distributiva (n) * (n)
         vl = new valorLagrange(v1.getValor() * v2.getValor(), 0);
         listLagrange.lagranges.add(vl);
+        sameXType(listLagrange.lagranges);
     }
 
     public void sameXType(List<valorLagrange> listP) {
-        System.out.println("O que entrou = " + listP);
+        // System.out.println("O que entrou = " + listP);
         int size = listP.size();
 
         for (int i = 0; i < size; i++) {
@@ -119,7 +135,7 @@ public class Resolving {
             }
         }
 
-        System.out.println("O que saiu = " + listP);
+        // System.out.println("O que saiu = " + listP);
         listaFinal = new ArrayList<>(listP);
     }
 

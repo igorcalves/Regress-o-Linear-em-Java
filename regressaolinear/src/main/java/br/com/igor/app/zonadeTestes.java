@@ -19,6 +19,15 @@ public class zonadeTestes {
         vl.add(new valorLagrange(1, 4));
         vl.add(new valorLagrange(1, 4));
         vl.add(new valorLagrange(53, 0));
-        rs.sameXType(vl);
+        // rs.sameXType(vl);
+
+        while (true) {
+            if (vl.isEmpty())
+                break;
+            vl.remove(0);
+            System.out.println("poi");
+
+        }
+        System.out.println("sai");
     }
 }
