@@ -3,7 +3,6 @@ package br.com.igor.app.Lagrange;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.igor.app.Mocks.listLagrange;
 import br.com.igor.app.Objetos.ValorLagrange;
 
 public class Resolving {
@@ -15,24 +14,29 @@ public class Resolving {
     private List<ValorLagrange> auxList = new ArrayList<>();
 
     public void run(List<ValorLagrange> lagrangeList) {
-        multplyXWithTwo(lagrangeList.get(0), lagrangeList.get(1));
-        sameXType(listLagrange.lagranges);
-        lagrangeList.remove(0);
-        lagrangeList.remove(0);
-        lagranges.addAll(lagrangeList);
 
-        if (!lagranges.isEmpty()) {
-            while (true) {
-                if (lagranges.isEmpty())
-                    break;
-                auxList.add(0, lagranges.get(0));
-                lagranges.remove(0);
-                multiplyAll(listaFinal, auxList);
-                auxList.remove(0);
+        for (int i = 0; i < lagrangeList.size(); i++) {
+            List<ValorLagrange> auxLagrangeList = new ArrayList<>(lagrangeList);
+            auxLagrangeList.remove(i);
+            multplyXWithTwo(auxLagrangeList.get(0), auxLagrangeList.get(1));
+            sameXType(listaFinal);
+            auxLagrangeList.remove(0);
+            auxLagrangeList.remove(0);
+            lagranges.addAll(auxLagrangeList);
+
+            if (!lagranges.isEmpty()) {
+                while (true) {
+                    if (lagranges.isEmpty())
+                        break;
+                    auxList.add(0, lagranges.get(0));
+                    lagranges.remove(0);
+                    multiplyAll(listaFinal, auxList);
+                    auxList.remove(0);
+                }
             }
+            System.out.println(listaFinal);
         }
 
-        System.out.println(listaFinal);
     }
 
     public void multiplyAll(List<ValorLagrange> listFinalValues, List<ValorLagrange> newValues) {
@@ -93,17 +97,17 @@ public class Resolving {
         listaFinal = new ArrayList<>();
         // primeira distributiva (x) * (x)
         vl = new ValorLagrange(1, v1.getX() + v2.getX());
-        listLagrange.lagranges.add(vl);
+        listaFinal.add(vl);
         // segunda distributiva (x) * (n)
         vl = new ValorLagrange(v1.getX() * v2.getValor(), v1.getX());
-        listLagrange.lagranges.add(vl);
+        listaFinal.add(vl);
         // terceira distributiva (n) * (x)
         vl = new ValorLagrange(v1.getValor(), v1.getX());
-        listLagrange.lagranges.add(vl);
+        listaFinal.add(vl);
         // quarta distributiva (n) * (n)
         vl = new ValorLagrange(v1.getValor() * v2.getValor(), 0);
-        listLagrange.lagranges.add(vl);
-        sameXType(listLagrange.lagranges);
+        listaFinal.add(vl);
+        sameXType(listaFinal);
     }
 
     public void sameXType(List<ValorLagrange> listP) {
@@ -133,11 +137,4 @@ public class Resolving {
         listaFinal = new ArrayList<>(listP);
     }
 
-    public int sumORSub(int v1, int v2) {
-        if (v2 < 0) {
-            return (v1) - (v2);
-        } else
-            return v1 + v2;
-
-    }
 }

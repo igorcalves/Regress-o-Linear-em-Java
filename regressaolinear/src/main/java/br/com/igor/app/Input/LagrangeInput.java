@@ -19,7 +19,7 @@ public class LagrangeInput {
         System.out.print("Digite o valor de (X) ou 'proximo' para digitar o proximo parametro: ");
         while (!valueOfX.atribuirValorInt(sc.nextLine(), 'X')) {
             if (valueOfX.getInt() != null) {
-                if (Integer.signum(valueOfX.getInt()) == 1) {
+                if (Integer.signum(valueOfX.getInt()) == -1) {
                     finalValueWithCorrectSignal = (~(valueOfX.getInt() - 1));
                 } else {
                     finalValueWithCorrectSignal = ~(valueOfX.getInt() - 1);

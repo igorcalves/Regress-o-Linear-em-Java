@@ -1,6 +1,5 @@
 package br.com.igor.app.Objetos;
 
-import br.com.igor.app.Mocks.listLagrange;
 import br.com.igor.app.Validations.inputValidations;
 
 public abstract class regras {
