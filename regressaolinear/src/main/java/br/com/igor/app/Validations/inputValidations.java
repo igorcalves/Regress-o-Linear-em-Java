@@ -2,7 +2,7 @@ package br.com.igor.app.Validations;
 
 public class inputValidations {
 
-    public static boolean IsValidNumeric(String numeric) {
+    public static boolean isValidNumeric(String numeric) {
         try {
             Integer.parseInt(numeric);
             return true;
@@ -23,7 +23,7 @@ public class inputValidations {
     }
 
     public static boolean rangeNumeric(String numberInString) {
-        if (IsValidNumeric(numberInString)) {
+        if (isValidNumeric(numberInString)) {
             int number = Integer.parseInt(numberInString);
             if (number >= 0 && number <= 9) {
                 return true;

@@ -3,31 +3,16 @@ package br.com.igor.app;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.igor.app.Input.LagrangeInput;
 import br.com.igor.app.Lagrange.Resolving;
-import br.com.igor.app.Objetos.valorLagrange;
+import br.com.igor.app.Objetos.ValorLagrange;
 
 public class zonadeTestes {
     public static void main(String[] args) {
 
-        Resolving rs = new Resolving();
-        List<valorLagrange> vl = new ArrayList<>();
+        LagrangeInput lgi = new LagrangeInput();
 
-        vl.add(new valorLagrange(1, 2));
-        vl.add(new valorLagrange(1, 2));
-        vl.add(new valorLagrange(1, 3));
-        vl.add(new valorLagrange(1, 3));
-        vl.add(new valorLagrange(1, 4));
-        vl.add(new valorLagrange(1, 4));
-        vl.add(new valorLagrange(53, 0));
-        // rs.sameXType(vl);
-
-        while (true) {
-            if (vl.isEmpty())
-                break;
-            vl.remove(0);
-            System.out.println("poi");
-
-        }
-        System.out.println("sai");
+        lgi.addValuesInListX();
+        lgi.attList();
     }
 }

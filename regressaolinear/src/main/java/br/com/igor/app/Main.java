@@ -5,27 +5,25 @@ import java.util.List;
 
 import br.com.igor.app.Lagrange.Resolving;
 import br.com.igor.app.Mocks.listLagrange;
-import br.com.igor.app.Objetos.valorLagrange;
+import br.com.igor.app.Objetos.ValorLagrange;
 
 public class Main {
     public static void main(String[] args) {
 
-        List<valorLagrange> vl = new ArrayList<>();
-        valorLagrange v1 = new valorLagrange(-10, 1);
-        valorLagrange v2 = new valorLagrange(-13, 1);
-        valorLagrange v3 = new valorLagrange(-4, 1);
+        List<ValorLagrange> vl = new ArrayList<>();
+        ValorLagrange v1 = new ValorLagrange(-10, 1);
+        ValorLagrange v2 = new ValorLagrange(13, 1);
+        ValorLagrange v3 = new ValorLagrange(4, 1);
 
+        vl.add(v1);
+        vl.add(v2);
         vl.add(v3);
 
         Resolving rs = new Resolving();
-        rs.run(v1, v2, null);
+        rs.run(vl);
 
         /*
-         * verificar uma forma de remover um valor de um array enquanto itera sobre ele
-         * ajustar o metodo sameType para encontrar os valores com (X) igual e somalos
-         * ou subtrailos
-         * implementar o metodo q altera os valores de v1 v2 e v3
-         * 
+        
          */
     }
 }

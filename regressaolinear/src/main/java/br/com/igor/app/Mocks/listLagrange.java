@@ -3,20 +3,16 @@ package br.com.igor.app.Mocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.igor.app.Objetos.valorLagrange;
+import br.com.igor.app.Objetos.ValorLagrange;
 
-public  class listLagrange {
+public class listLagrange {
 
-    public static List<valorLagrange> lagranges = new ArrayList<>();
-
+    public static List<ValorLagrange> lagranges = new ArrayList<>();
 
     public static void list() {
-        for (valorLagrange valorLagrange : lagranges) {
-                System.out.print(valorLagrange + " ");
+        for (ValorLagrange valorLagrange : lagranges) {
+            System.out.print(valorLagrange + " ");
         }
     }
 
-
-    
-    
 }

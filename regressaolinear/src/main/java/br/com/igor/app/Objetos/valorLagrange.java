@@ -1,11 +1,11 @@
 package br.com.igor.app.Objetos;
 
-public class valorLagrange {
+public class ValorLagrange {
 
     private Integer valor;
     private Integer x;
 
-    public valorLagrange(int valor, int x) {
+    public ValorLagrange(int valor, int x) {
         this.valor = valor;
         this.x = x;
     }
@@ -54,6 +54,16 @@ public class valorLagrange {
                 return valor + "X^" + getX();
         } else
             return valor + "";
+    }
+
+    private int checkSignalValue(int value) {
+        if (Integer.signum(value) == 1) {
+            int negativeVal = (~(value - 1));
+            return negativeVal;
+        } else {
+            int positiveValue = (~(value - 1));
+            return positiveValue;
+        }
     }
 
 }
