@@ -9,32 +9,61 @@ public class Resolving {
 
     private ValorLagrange vl;
 
-    private List<ValorLagrange> lagranges = new ArrayList<>();
-    private List<ValorLagrange> listaFinal;
-    private List<ValorLagrange> auxList = new ArrayList<>();
+    private List<ValorLagrange> lagrangesUpSide = new ArrayList<>();
+    private List<ValorLagrange> finalUpSideList;
+    private List<ValorLagrange> finalUpDownList = new ArrayList<>();
+    private List<ValorLagrange> auxUpSideList = new ArrayList<>();
+    private List<Integer> auxDownSideList = new ArrayList<>();
 
     public void run(List<ValorLagrange> lagrangeList) {
+        // resolvingUpSide(lagrangeList);
+        resolvingDownSide(lagrangeList);
+    }
 
+    public void resolvingUpSide(List<ValorLagrange> lagrangeList) {
         for (int i = 0; i < lagrangeList.size(); i++) {
             List<ValorLagrange> auxLagrangeList = new ArrayList<>(lagrangeList);
             auxLagrangeList.remove(i);
             multplyXWithTwo(auxLagrangeList.get(0), auxLagrangeList.get(1));
-            sameXType(listaFinal);
+            sameXType(finalUpSideList);
             auxLagrangeList.remove(0);
             auxLagrangeList.remove(0);
-            lagranges.addAll(auxLagrangeList);
+            lagrangesUpSide.addAll(auxLagrangeList);
 
-            if (!lagranges.isEmpty()) {
+            if (!lagrangesUpSide.isEmpty()) {
                 while (true) {
-                    if (lagranges.isEmpty())
+                    if (lagrangesUpSide.isEmpty())
                         break;
-                    auxList.add(0, lagranges.get(0));
-                    lagranges.remove(0);
-                    multiplyAll(listaFinal, auxList);
-                    auxList.remove(0);
+                    auxUpSideList.add(0, lagrangesUpSide.get(0));
+                    lagrangesUpSide.remove(0);
+                    multiplyAll(finalUpSideList, auxUpSideList);
+                    auxUpSideList.remove(0);
                 }
             }
-            System.out.println(listaFinal);
+            System.out.println(finalUpSideList);
+        }
+    }
+
+    public void resolvingDownSide(List<ValorLagrange> lagrangeList) {
+
+        for (int i = 0; i < lagrangeList.size(); i++) {
+            int x = 0;
+            List<ValorLagrange> auxLagrangeList = new ArrayList<>(lagrangeList);
+            x = invertSignalNumber(lagrangeList.get(i).getValor());
+            auxLagrangeList.remove(i);
+            for (ValorLagrange valorLagrange : auxLagrangeList) {
+                auxDownSideList.add(invertSignalNumber(valorLagrange.getValor()) - x);
+            }
+            System.out.println(auxDownSideList.get(0) * auxDownSideList.get(1));
+            int indexJ = auxDownSideList.size();
+            // com 2 valores esta dando certo, oque deve ser feito é a estretegia de pegar o
+            // valor que deu certo e ir multiplicando pelo resto da lista
+            for (int j = 0; j < indexJ; j++) {
+                if (auxDownSideList.isEmpty())
+                    break;
+                auxDownSideList.remove(0);
+            }
+
         }
 
     }
@@ -89,25 +118,25 @@ public class Resolving {
         results.add(new ValorLagrange(listFinalValues.get((listFinalValues.size() - 1)).getValor()
                 * newValues.get((newValues.size() - 1)).getValor(), 0));
         sameXType(results);
-        listaFinal.clear();
-        listaFinal.addAll(results);
+        finalUpSideList.clear();
+        finalUpSideList.addAll(results);
     }
 
     public void multplyXWithTwo(ValorLagrange v1, ValorLagrange v2) {
-        listaFinal = new ArrayList<>();
+        finalUpSideList = new ArrayList<>();
         // primeira distributiva (x) * (x)
         vl = new ValorLagrange(1, v1.getX() + v2.getX());
-        listaFinal.add(vl);
+        finalUpSideList.add(vl);
         // segunda distributiva (x) * (n)
         vl = new ValorLagrange(v1.getX() * v2.getValor(), v1.getX());
-        listaFinal.add(vl);
+        finalUpSideList.add(vl);
         // terceira distributiva (n) * (x)
         vl = new ValorLagrange(v1.getValor(), v1.getX());
-        listaFinal.add(vl);
+        finalUpSideList.add(vl);
         // quarta distributiva (n) * (n)
         vl = new ValorLagrange(v1.getValor() * v2.getValor(), 0);
-        listaFinal.add(vl);
-        sameXType(listaFinal);
+        finalUpSideList.add(vl);
+        sameXType(finalUpSideList);
     }
 
     public void sameXType(List<ValorLagrange> listP) {
@@ -134,7 +163,17 @@ public class Resolving {
         }
 
         // System.out.println("O que saiu = " + listP);
-        listaFinal = new ArrayList<>(listP);
+        finalUpSideList = new ArrayList<>(listP);
+    }
+
+    public int invertSignalNumber(int value) {
+        if (Integer.signum(value) == -1) {
+            int positiveValue = (~(value - 1));
+            return positiveValue;
+        } else {
+            int negativeValue = ~(value - 1);
+            return negativeValue;
+        }
     }
 
 }
