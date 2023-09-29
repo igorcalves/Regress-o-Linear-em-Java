@@ -5,6 +5,7 @@ import java.util.List;
 
 import br.com.igor.app.Objetos.ValorLagrange;
 
+
 public class Resolving {
 
     private ValorLagrange vl;
@@ -16,8 +17,8 @@ public class Resolving {
     private List<Integer> auxDownSideList = new ArrayList<>();
 
     public void run(List<ValorLagrange> lagrangeList) {
-        // resolvingUpSide(lagrangeList);
-        resolvingDownSide(lagrangeList);
+        resolvingUpSide(lagrangeList);
+        //resolvingDownSide(lagrangeList);
     }
 
     public void resolvingUpSide(List<ValorLagrange> lagrangeList) {
