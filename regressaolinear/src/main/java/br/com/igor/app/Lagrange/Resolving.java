@@ -3,6 +3,7 @@ package br.com.igor.app.Lagrange;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.igor.app.Objetos.Ln;
 import br.com.igor.app.Objetos.ValorLagrange;
 
 
@@ -12,13 +13,37 @@ public class Resolving {
 
     private List<ValorLagrange> lagrangesUpSide = new ArrayList<>();
     private List<ValorLagrange> finalUpSideList;
-    private List<ValorLagrange> finalUpDownList = new ArrayList<>();
     private List<ValorLagrange> auxUpSideList = new ArrayList<>();
-    private List<Integer> auxDownSideList = new ArrayList<>();
+    private List<ValorLagrange> LnUpSide = new ArrayList<>();
+    private List<Integer> LnDownSide = new ArrayList<>();
+
+    private int sizeFinalList = 0;
+
+
 
     public void run(List<ValorLagrange> lagrangeList) {
         resolvingUpSide(lagrangeList);
-        //resolvingDownSide(lagrangeList);
+        resolvingDownSide(lagrangeList);
+
+        for (int ii = 0; ii <= lagrangeList.size() +1; ii++) {
+            if(!LnUpSide.isEmpty()){
+                for(int i = 0;i <=sizeFinalList;i++){
+                    System.out.print(" " + LnUpSide.get(0));
+                    LnUpSide.remove(0);
+                }  
+                System.out.println("\n      _____________ \n           " + LnDownSide.get(ii));    
+            }
+        }
+        
+        /*
+         * 
+         for (int index = 0; index < lagrangeList.size(); index++) {
+             System.out.println("L" + index);
+             System.out.println();
+            }
+            */
+            
+
     }
 
     public void resolvingUpSide(List<ValorLagrange> lagrangeList) {
@@ -41,31 +66,32 @@ public class Resolving {
                     auxUpSideList.remove(0);
                 }
             }
-            System.out.println(finalUpSideList);
+            System.out.println("L(" +i+")"+finalUpSideList);
+            sizeFinalList = finalUpSideList.size() -1 ;
+            LnUpSide.addAll(finalUpSideList);
         }
     }
 
     public void resolvingDownSide(List<ValorLagrange> lagrangeList) {
-
         for (int i = 0; i < lagrangeList.size(); i++) {
-            int x = 0;
+            int result = 1;
+            List<Integer> valueCalculate = new ArrayList<>();
             List<ValorLagrange> auxLagrangeList = new ArrayList<>(lagrangeList);
-            x = invertSignalNumber(lagrangeList.get(i).getValor());
+            int x = auxLagrangeList.get(i).getValor();
             auxLagrangeList.remove(i);
-            for (ValorLagrange valorLagrange : auxLagrangeList) {
-                auxDownSideList.add(invertSignalNumber(valorLagrange.getValor()) - x);
+            //System.out.println("X = " + x+" l = "+auxLagrangeList);
+            for (ValorLagrange valueForCalc : auxLagrangeList) {
+                valueCalculate.add(invertSignalNumber(x) - invertSignalNumber(valueForCalc.getValor()));
             }
-            System.out.println(auxDownSideList.get(0) * auxDownSideList.get(1));
-            int indexJ = auxDownSideList.size();
-            // com 2 valores esta dando certo, oque deve ser feito é a estretegia de pegar o
-            // valor que deu certo e ir multiplicando pelo resto da lista
-            for (int j = 0; j < indexJ; j++) {
-                if (auxDownSideList.isEmpty())
-                    break;
-                auxDownSideList.remove(0);
+            for (Integer calc : valueCalculate) {
+                result *=calc;
+                
             }
-
+            LnDownSide.add(result);
         }
+
+
+        
 
     }
 
@@ -141,7 +167,7 @@ public class Resolving {
     }
 
     public void sameXType(List<ValorLagrange> listP) {
-        // System.out.println("O que entrou = " + listP);
+         //System.out.println("O que entrou = " + listP);
         int size = listP.size();
 
         for (int i = 0; i < size; i++) {
@@ -163,7 +189,7 @@ public class Resolving {
             }
         }
 
-        // System.out.println("O que saiu = " + listP);
+         //System.out.println("O que saiu = " + listP);
         finalUpSideList = new ArrayList<>(listP);
     }
 
