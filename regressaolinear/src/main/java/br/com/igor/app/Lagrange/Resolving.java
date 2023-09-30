@@ -21,11 +21,11 @@ public class Resolving {
 
 
 
-    public void run(List<ValorLagrange> lagrangeList) {
-        resolvingUpSide(lagrangeList);
-        resolvingDownSide(lagrangeList);
+    public void run(List<ValorLagrange> lagrangeListX) {
+        resolvingUpSide(lagrangeListX);
+        resolvingDownSide(lagrangeListX);
 
-        for (int ii = 0; ii <= lagrangeList.size() +1; ii++) {
+        for (int ii = 0; ii <= lagrangeListX.size() +1; ii++) {
             if(!LnUpSide.isEmpty()){
                 for(int i = 0;i <=sizeFinalList;i++){
                     System.out.print(" " + LnUpSide.get(0));
