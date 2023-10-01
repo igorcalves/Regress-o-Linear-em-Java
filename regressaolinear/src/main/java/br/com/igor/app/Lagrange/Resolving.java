@@ -15,6 +15,9 @@ public class Resolving {
     private List<ValorLagrange> finalUpSideList;
     private List<ValorLagrange> auxUpSideList = new ArrayList<>();
     private List<ValorLagrange> LnUpSide = new ArrayList<>();
+    private List<ValorLagrange> LnXFn = new ArrayList<>();
+
+
     private List<Integer> LnDownSide = new ArrayList<>();
 
     private int sizeFinalList = 0;
@@ -24,25 +27,8 @@ public class Resolving {
     public void run(List<ValorLagrange> lagrangeListX) {
         resolvingUpSide(lagrangeListX);
         resolvingDownSide(lagrangeListX);
-
-        for (int ii = 0; ii <= lagrangeListX.size() +1; ii++) {
-            if(!LnUpSide.isEmpty()){
-                for(int i = 0;i <=sizeFinalList;i++){
-                    System.out.print(" " + LnUpSide.get(0));
-                    LnUpSide.remove(0);
-                }  
-                System.out.println("\n      _____________ \n           " + LnDownSide.get(ii));    
-            }
-        }
-        
-        /*
-         * 
-         for (int index = 0; index < lagrangeList.size(); index++) {
-             System.out.println("L" + index);
-             System.out.println();
-            }
-            */
-            
+        printLnResults(lagrangeListX,LnUpSide);
+        multAllNumberForY(lagrangeListX,null);
 
     }
 
@@ -166,6 +152,25 @@ public class Resolving {
         sameXType(finalUpSideList);
     }
 
+    private void multAllNumberForY(List<ValorLagrange> lagrangeListX, List<Integer> lagrangeListY){
+
+        lagrangeListY = new ArrayList<>();
+        lagrangeListY.add(15);
+        lagrangeListY.add(8);
+        lagrangeListY.add(-1);
+        //lagrangeListY.add(60);
+
+        for (int ii = 0; ii <= lagrangeListX.size() +1; ii++) {
+            if(!LnUpSide.isEmpty()){
+                for(int i = 0;i <=sizeFinalList;i++){
+                      LnXFn.add(new ValorLagrange(LnUpSide.get(0).getValor() * lagrangeListY.get(ii), LnUpSide.get(0).getX()));
+                    LnUpSide.remove(0);
+                } 
+            }
+        }
+        printLnResults(lagrangeListX ,LnXFn);
+    }
+
     public void sameXType(List<ValorLagrange> listP) {
          //System.out.println("O que entrou = " + listP);
         int size = listP.size();
@@ -200,6 +205,21 @@ public class Resolving {
         } else {
             int negativeValue = ~(value - 1);
             return negativeValue;
+        }
+    }
+
+    private void printLnResults(List<ValorLagrange> lagrangeListX,List<ValorLagrange> lnList){
+
+        List<ValorLagrange> auxLnList = new ArrayList<>(lnList);
+        for (int ii = 0; ii <= lagrangeListX.size() +1; ii++) {
+            if(!auxLnList.isEmpty()){
+                System.out.print("L" + ii + "=  ");
+                for(int i = 0;i <=sizeFinalList;i++){
+                    System.out.print(" " + auxLnList.get(0));
+                    auxLnList.remove(0);
+                }  
+                System.out.println("\n      _____________ \n           " + LnDownSide.get(ii));    
+            }
         }
     }
 

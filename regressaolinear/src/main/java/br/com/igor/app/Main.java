@@ -11,10 +11,10 @@ public class Main {
     public static void main(String[] args) {
 
         List<ValorLagrange> vl = new ArrayList<>();
-        ValorLagrange v1 = new ValorLagrange(4, 1);
-        ValorLagrange v2 = new ValorLagrange(-1, 1);
-        ValorLagrange v3 = new ValorLagrange(-6, 1);
-        ValorLagrange v4 = new ValorLagrange(-2, 1);
+        ValorLagrange v1 = new ValorLagrange(1, 1);
+        ValorLagrange v2 = new ValorLagrange(0, 1);
+        ValorLagrange v3 = new ValorLagrange(-3, 1);
+        ValorLagrange v4 = new ValorLagrange(-5, 1);
 
 
 
