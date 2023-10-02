@@ -29,6 +29,7 @@ public class Resolving {
         resolvingDownSide(lagrangeListX);
         printLnResults(lagrangeListX,LnUpSide);
         multAllNumberForY(lagrangeListX,null);
+        resolvingLastPart(lagrangeListX, LnXFn);
 
     }
 
@@ -86,7 +87,6 @@ public class Resolving {
 
         List<ValorLagrange> results = new ArrayList<>();
         int mult = 1;
-        int index = 0;
 
         for (ValorLagrange finalValue : listFinalValues) {
 
@@ -123,7 +123,6 @@ public class Resolving {
                     int newValueX = finalValue.getX() + newValue.getX();
                     results.add(new ValorLagrange(newValueValor, newValueX));
                 }
-                index++;
             }
 
         }
@@ -191,10 +190,24 @@ public class Resolving {
                         j--;
                     }
                 }
+            }else if(termoI.getX() ==0){
+                for (int j = i + 1; j < size; j++) {
+                    ValorLagrange termoJ = listP.get(j);
+                    if(termoI.getX() == termoJ.getX()){
+                        int novoValor = termoI.getValor() + termoJ.getValor();
+                        termoI.setValor(novoValor);
+                        listP.remove(j);
+                        size--;
+                        j--;
+                    } 
+                }
             }
         }
+        
+
 
          //System.out.println("O que saiu = " + listP);
+         System.out.println(listP);
         finalUpSideList = new ArrayList<>(listP);
     }
 
@@ -221,6 +234,50 @@ public class Resolving {
                 System.out.println("\n      _____________ \n           " + LnDownSide.get(ii));    
             }
         }
+    }
+
+
+    private  int mdc(int a, int b){        
+        while(b != 0){
+            int r = a % b;
+            a = b;
+            b = r;
+        }
+        return a;
+    }
+    
+    public  int mmcLista(List<Integer> numberList){
+        if(numberList.size() < 2){
+            throw new IllegalArgumentException("A lista deve conter pelo menos dois números");
+        }
+        int mmcResultado = numberList.get(0);
+        for(int i = 1; i < numberList.size(); i++){
+            mmcResultado = mmcResultado * (Math.abs(numberList.get(i)) / mdc(mmcResultado, Math.abs(numberList.get(i))));
+        }
+        return mmcResultado;
+    }
+
+    public void resolvingLastPart(List<ValorLagrange> lagrangeListX,List<ValorLagrange> lnList){
+        List<ValorLagrange> TERMINOOOO = new ArrayList<>();
+        List<ValorLagrange> auxLnList = new ArrayList<>(lnList);
+
+        int mmc = mmcLista(LnDownSide);
+
+       
+
+        for (int ii = 0; ii <= lagrangeListX.size() +1; ii++) {
+            int resuls = 0;
+            if(!auxLnList.isEmpty()){
+                for(int i = 0;i <=sizeFinalList;i++){
+                    resuls = (mmc/LnDownSide.get(ii)) *  auxLnList.get(0).getValor();
+                    TERMINOOOO.add(new ValorLagrange(resuls, auxLnList.get(0).getX()));
+                    auxLnList.remove(0);
+                }     
+            }
+        }
+        System.out.println("Resultado = " + TERMINOOOO);
+        sameXType(TERMINOOOO);
+        System.out.println("-------------------\n         " + mmc);
     }
 
 }

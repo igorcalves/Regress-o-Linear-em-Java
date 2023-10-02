@@ -14,7 +14,7 @@ public class Main {
         ValorLagrange v1 = new ValorLagrange(1, 1);
         ValorLagrange v2 = new ValorLagrange(0, 1);
         ValorLagrange v3 = new ValorLagrange(-3, 1);
-        ValorLagrange v4 = new ValorLagrange(-5, 1);
+        ValorLagrange v4 = new ValorLagrange(-24, 1);
 
 
 
