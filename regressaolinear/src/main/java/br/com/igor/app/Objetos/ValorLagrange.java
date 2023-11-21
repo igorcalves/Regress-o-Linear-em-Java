@@ -2,19 +2,19 @@ package br.com.igor.app.Objetos;
 
 public class ValorLagrange {
 
-    private Integer valor;
+    private Double valor;
     private Integer x;
 
-    public ValorLagrange(int valor, int x) {
+    public ValorLagrange(Double valor, int x) {
         this.valor = valor;
         this.x = x;
     }
 
-    public Integer getValor() {
+    public Double getValor() {
         return valor;
     }
 
-    public void setValor(Integer valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
 

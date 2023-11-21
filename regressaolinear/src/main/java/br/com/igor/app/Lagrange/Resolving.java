@@ -3,7 +3,7 @@ package br.com.igor.app.Lagrange;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.igor.app.Objetos.Ln;
+import br.com.igor.app.Mocks.lists;
 import br.com.igor.app.Objetos.ValorLagrange;
 
 
@@ -24,11 +24,11 @@ public class Resolving {
 
 
 
-    public void run(List<ValorLagrange> lagrangeListX) {
+    public void run(List<ValorLagrange> lagrangeListX,List<Double> lagrangeListY) {
         resolvingUpSide(lagrangeListX);
         resolvingDownSide(lagrangeListX);
         printLnResults(lagrangeListX,LnUpSide);
-        multAllNumberForY(lagrangeListX,null);
+        multAllNumberForY(lagrangeListX,lagrangeListY);
         resolvingLastPart(lagrangeListX, LnXFn);
 
     }
@@ -62,15 +62,15 @@ public class Resolving {
     public void resolvingDownSide(List<ValorLagrange> lagrangeList) {
         for (int i = 0; i < lagrangeList.size(); i++) {
             int result = 1;
-            List<Integer> valueCalculate = new ArrayList<>();
+            List<Double> valueCalculate = new ArrayList<>();
             List<ValorLagrange> auxLagrangeList = new ArrayList<>(lagrangeList);
-            int x = auxLagrangeList.get(i).getValor();
+            Double x = auxLagrangeList.get(i).getValor();
             auxLagrangeList.remove(i);
             //System.out.println("X = " + x+" l = "+auxLagrangeList);
             for (ValorLagrange valueForCalc : auxLagrangeList) {
-                valueCalculate.add(invertSignalNumber(x) - invertSignalNumber(valueForCalc.getValor()));
+                valueCalculate.add((x * -1) - (valueForCalc.getValor() * -1));
             }
-            for (Integer calc : valueCalculate) {
+            for (Double calc : valueCalculate) {
                 result *=calc;
                 
             }
@@ -95,19 +95,19 @@ public class Resolving {
             for (ValorLagrange newValue : newValues) {
                 // (x) * (x)
                 if (finalValue.hasX() && newValue.hasX()) {
-                    int newValueValor = finalValue.getValor() * newValue.getX();
+                    Double newValueValor = finalValue.getValor() * newValue.getX();
                     int newValueX = finalValue.getX() + newValue.getX();
                     results.add(new ValorLagrange(newValueValor, newValueX));
                 }
                 // (x) * (n)
                 if (finalValue.hasX() && newValue.getX() == 1) {
                     if (mult == 1) {
-                        int newValueValor = newValue.getValor();
+                        Double newValueValor = newValue.getValor();
                         int newValueX = finalValue.getX();
                         results.add(new ValorLagrange(newValueValor, newValueX));
                         mult++;
                     } else {
-                        int newValueValor = finalValue.getValor() * newValue.getValor();
+                        Double newValueValor = finalValue.getValor() * newValue.getValor();
                         int newValueX = finalValue.getX();
                         results.add(new ValorLagrange(newValueValor, newValueX));
                     }
@@ -119,7 +119,7 @@ public class Resolving {
                 }
 
                 else if (!finalValue.hasX() && newValue.hasX()) {
-                    int newValueValor = finalValue.getValor() * newValue.getX();
+                    Double newValueValor = finalValue.getValor() * newValue.getX();
                     int newValueX = finalValue.getX() + newValue.getX();
                     results.add(new ValorLagrange(newValueValor, newValueX));
                 }
@@ -137,7 +137,7 @@ public class Resolving {
     public void multplyXWithTwo(ValorLagrange v1, ValorLagrange v2) {
         finalUpSideList = new ArrayList<>();
         // primeira distributiva (x) * (x)
-        vl = new ValorLagrange(1, v1.getX() + v2.getX());
+        vl = new ValorLagrange(1.0, v1.getX() + v2.getX());
         finalUpSideList.add(vl);
         // segunda distributiva (x) * (n)
         vl = new ValorLagrange(v1.getX() * v2.getValor(), v1.getX());
@@ -151,13 +151,7 @@ public class Resolving {
         sameXType(finalUpSideList);
     }
 
-    private void multAllNumberForY(List<ValorLagrange> lagrangeListX, List<Integer> lagrangeListY){
-
-        lagrangeListY = new ArrayList<>();
-        lagrangeListY.add(15);
-        lagrangeListY.add(8);
-        lagrangeListY.add(-1);
-        //lagrangeListY.add(60);
+    private void multAllNumberForY(List<ValorLagrange> lagrangeListX, List<Double> lagrangeListY){
 
         for (int ii = 0; ii <= lagrangeListX.size() +1; ii++) {
             if(!LnUpSide.isEmpty()){
@@ -182,7 +176,7 @@ public class Resolving {
                     ValorLagrange termoJ = listP.get(j);
 
                     if (termoJ.getX() != null && termoJ.getX() != 0 && termoJ.getX().equals(termoI.getX())) {
-                        int novoValor = termoI.getValor() + termoJ.getValor();
+                        Double novoValor = termoI.getValor() + termoJ.getValor();
                         termoI.setValor(novoValor);
 
                         listP.remove(j);
@@ -194,7 +188,7 @@ public class Resolving {
                 for (int j = i + 1; j < size; j++) {
                     ValorLagrange termoJ = listP.get(j);
                     if(termoI.getX() == termoJ.getX()){
-                        int novoValor = termoI.getValor() + termoJ.getValor();
+                        Double novoValor = termoI.getValor() + termoJ.getValor();
                         termoI.setValor(novoValor);
                         listP.remove(j);
                         size--;
@@ -211,15 +205,19 @@ public class Resolving {
         finalUpSideList = new ArrayList<>(listP);
     }
 
-    public int invertSignalNumber(int value) {
-        if (Integer.signum(value) == -1) {
-            int positiveValue = (~(value - 1));
-            return positiveValue;
-        } else {
-            int negativeValue = ~(value - 1);
-            return negativeValue;
+
+    /*
+     * 
+     public Double invertSignalNumber(int value) {
+         if (Math.signum(value) == -1) {
+             Double positiveValue = (~(value - 1));
+             return positiveValue;
+            } else {
+                int negativeValue = ~(value - 1);
+                return negativeValue;
+            }
         }
-    }
+        */
 
     private void printLnResults(List<ValorLagrange> lagrangeListX,List<ValorLagrange> lnList){
 
@@ -266,7 +264,7 @@ public class Resolving {
        
 
         for (int ii = 0; ii <= lagrangeListX.size() +1; ii++) {
-            int resuls = 0;
+            Double resuls = 0.0;
             if(!auxLnList.isEmpty()){
                 for(int i = 0;i <=sizeFinalList;i++){
                     resuls = (mmc/LnDownSide.get(ii)) *  auxLnList.get(0).getValor();

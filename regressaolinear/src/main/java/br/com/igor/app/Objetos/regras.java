@@ -14,7 +14,7 @@ public abstract class regras {
     }
 
     public boolean atribuirValorDouble(String value, char parameter) {
-        if (value.equalsIgnoreCase("proximo"))
+        if (value.equalsIgnoreCase("proximo") && parameter == 'X')
             return true;
         try {
             Double.parseDouble(value);
