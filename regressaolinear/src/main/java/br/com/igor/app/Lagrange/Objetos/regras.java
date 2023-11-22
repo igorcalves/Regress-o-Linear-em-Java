@@ -1,4 +1,4 @@
-package br.com.igor.app.Objetos;
+package br.com.igor.app.Lagrange.Objetos;
 
 import br.com.igor.app.Validations.inputValidations;
 

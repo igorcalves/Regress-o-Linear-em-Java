@@ -1,11 +1,10 @@
-package br.com.igor.app;
+package br.com.igor.app.Lagrange;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.igor.app.Input.LagrangeInput;
-import br.com.igor.app.Lagrange.Resolving;
-import br.com.igor.app.Objetos.ValorLagrange;
+import br.com.igor.app.Lagrange.Input.LagrangeInput;
+import br.com.igor.app.Lagrange.Objetos.ValorLagrange;
 
 public class zonadeTestes {
     public static void main(String[] args) {

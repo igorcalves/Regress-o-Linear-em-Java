@@ -3,8 +3,7 @@ package br.com.igor.app.Lagrange;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.igor.app.Mocks.lists;
-import br.com.igor.app.Objetos.ValorLagrange;
+import br.com.igor.app.Lagrange.Objetos.ValorLagrange;
 
 
 public class Resolving {
@@ -83,7 +82,6 @@ public class Resolving {
     }
 
     public void multiplyAll(List<ValorLagrange> listFinalValues, List<ValorLagrange> newValues) {
-        // System.out.println(listFinalValues);
 
         List<ValorLagrange> results = new ArrayList<>();
         int mult = 1;
@@ -95,8 +93,10 @@ public class Resolving {
             for (ValorLagrange newValue : newValues) {
                 // (x) * (x)
                 if (finalValue.hasX() && newValue.hasX()) {
+                    //System.out.println("sdsdsds " + finalValue.getValor() + " "+ newValue.getX() );
                     Double newValueValor = finalValue.getValor() * newValue.getX();
                     int newValueX = finalValue.getX() + newValue.getX();
+                    
                     results.add(new ValorLagrange(newValueValor, newValueX));
                 }
                 // (x) * (n)
@@ -138,9 +138,11 @@ public class Resolving {
         finalUpSideList = new ArrayList<>();
         // primeira distributiva (x) * (x)
         vl = new ValorLagrange(1.0, v1.getX() + v2.getX());
+
         finalUpSideList.add(vl);
         // segunda distributiva (x) * (n)
         vl = new ValorLagrange(v1.getX() * v2.getValor(), v1.getX());
+
         finalUpSideList.add(vl);
         // terceira distributiva (n) * (x)
         vl = new ValorLagrange(v1.getValor(), v1.getX());
@@ -259,9 +261,7 @@ public class Resolving {
         List<ValorLagrange> TERMINOOOO = new ArrayList<>();
         List<ValorLagrange> auxLnList = new ArrayList<>(lnList);
 
-        int mmc = mmcLista(LnDownSide);
-
-       
+        int mmc = Math.abs(mmcLista(LnDownSide));
 
         for (int ii = 0; ii <= lagrangeListX.size() +1; ii++) {
             Double resuls = 0.0;

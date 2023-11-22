@@ -1,11 +1,11 @@
-package br.com.igor.app.Input;
+package br.com.igor.app.Lagrange.Input;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import br.com.igor.app.Objetos.fx;
-import br.com.igor.app.Objetos.x;
+import br.com.igor.app.Lagrange.Objetos.fx;
+import br.com.igor.app.Lagrange.Objetos.x;
 import br.com.igor.app.RegressaoLinear.resolving;
 
 public class RegressaoInput {
