@@ -26,7 +26,7 @@ public class LagrangeInput {
                 listX.add(new ValorLagrange(finalValueWithCorrectSignal, 1));
             }
             valueOfX = new x("");
-            System.out.println(listX);
+            showList('X');
         }
 
         finalValueWithCorrectSignal = 0.0;
@@ -38,7 +38,7 @@ public class LagrangeInput {
                 listY.add(finalValueWithCorrectSignal);
             }
             valueOfX = new x("");
-            System.out.println(listY);
+            showList('Y');
             c++;
             if(c == listX.size()) break;
         }
@@ -51,6 +51,22 @@ public class LagrangeInput {
     public void attList() {
         Resolving rs = new Resolving();
         rs.run(listX,listY);
+    }
+
+
+    private void showList(char l){
+        if(l == 'X'){
+            for (ValorLagrange valores : listX) {
+                System.out.print((valores.getValor() * -1) + " ");
+            }
+            System.out.println();
+        }
+        if(l == 'Y'){
+            for (Double valores : listY) {
+                System.out.print(valores + " ");
+            }
+            System.out.println();
+        }
     }
 
 }

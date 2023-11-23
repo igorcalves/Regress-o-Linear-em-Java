@@ -33,37 +33,44 @@ public class ValorLagrange {
             return true;
     }
 
-    private boolean valueIsOne() {
-        if (this.getValor() == 1)
-            return true;
-        else
-            return false;
-    }
-
     @Override
     public String toString() {
+        String op = "";
+        if(valor>0) op = "+";
+        if(valor == -1){
+            op = "-";
+        }
         if (hasX()) {
             if (getX() == 1) {
-                if (getValor() == 1) {
-                    return "X";
+                if (getValor() == 1 || getValor() == -1) {
+                    return op +""+"X";
                 } else
-                    return valor + "X";
-            } else if (getValor() == 1)
-                return "X^" + getX();
+                    return op+ "" +valor + "X";
+            }
             else
-                return valor + "X^" + getX();
+            if(getValor() == 1 || getValor() == -1){
+                return op+ "" + "X^" + getPowX(getX());
+            }
+                return op+ "" +valor + "X^" + getPowX(getX());
         } else
-            return valor + "";
+            if(valor == 0) return "";
+            return op+"" + valor + "";
     }
 
-    private int checkSignalValue(int value) {
-        if (Integer.signum(value) == 1) {
-            int negativeVal = (~(value - 1));
-            return negativeVal;
-        } else {
-            int positiveValue = (~(value - 1));
-            return positiveValue;
-        }
-    }
+
+    public static String getPowX(int numero) {
+
+		String[] exp = { "⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹" };
+
+		StringBuilder expoente = new StringBuilder();
+		String nStr = String.valueOf(numero);
+		for (char digit : nStr.toCharArray()) {
+			int indice = Character.getNumericValue(digit);
+			expoente.append(exp[indice]);
+		}
+
+		return expoente.toString();
+	}
+
 
 }

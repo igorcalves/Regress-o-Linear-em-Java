@@ -37,7 +37,8 @@ public class Main {
 
 
         Resolving rs = new Resolving();
-        rs.run(vl,vl1);
+       rs.run(vl,vl1);
+        
 
         /*
         

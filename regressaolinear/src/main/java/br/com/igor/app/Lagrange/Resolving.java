@@ -37,7 +37,7 @@ public class Resolving {
             List<ValorLagrange> auxLagrangeList = new ArrayList<>(lagrangeList);
             auxLagrangeList.remove(i);
             multplyXWithTwo(auxLagrangeList.get(0), auxLagrangeList.get(1));
-            sameXType(finalUpSideList);
+            sameXType(finalUpSideList,false);
             auxLagrangeList.remove(0);
             auxLagrangeList.remove(0);
             lagrangesUpSide.addAll(auxLagrangeList);
@@ -129,7 +129,7 @@ public class Resolving {
 
         results.add(new ValorLagrange(listFinalValues.get((listFinalValues.size() - 1)).getValor()
                 * newValues.get((newValues.size() - 1)).getValor(), 0));
-        sameXType(results);
+        sameXType(results,false);
         finalUpSideList.clear();
         finalUpSideList.addAll(results);
     }
@@ -150,7 +150,7 @@ public class Resolving {
         // quarta distributiva (n) * (n)
         vl = new ValorLagrange(v1.getValor() * v2.getValor(), 0);
         finalUpSideList.add(vl);
-        sameXType(finalUpSideList);
+        sameXType(finalUpSideList,false);
     }
 
     private void multAllNumberForY(List<ValorLagrange> lagrangeListX, List<Double> lagrangeListY){
@@ -166,7 +166,7 @@ public class Resolving {
         printLnResults(lagrangeListX ,LnXFn);
     }
 
-    public void sameXType(List<ValorLagrange> listP) {
+    public void sameXType(List<ValorLagrange> listP,boolean show) {
          //System.out.println("O que entrou = " + listP);
         int size = listP.size();
 
@@ -203,7 +203,8 @@ public class Resolving {
 
 
          //System.out.println("O que saiu = " + listP);
-         System.out.println(listP);
+         //System.out.println(listP);
+         if(show) showList(listP);
         finalUpSideList = new ArrayList<>(listP);
     }
 
@@ -231,7 +232,7 @@ public class Resolving {
                     System.out.print(" " + auxLnList.get(0));
                     auxLnList.remove(0);
                 }  
-                System.out.println("\n      _____________ \n           " + LnDownSide.get(ii));    
+                System.out.println("\n      _____________ \n           " + LnDownSide.get(ii)+"\n");    
             }
         }
     }
@@ -273,9 +274,16 @@ public class Resolving {
                 }     
             }
         }
-        System.out.println("Resultado = " + TERMINOOOO);
-        sameXType(TERMINOOOO);
-        System.out.println("-------------------\n         " + mmc);
+        System.out.println("*****************RESULTADO*****************\n\n");
+        sameXType(TERMINOOOO,true);
+        System.out.println("     -------------------\n             " + mmc);
+    }
+
+    private void showList(List<ValorLagrange> listShow){
+        for (ValorLagrange values : listShow) {
+            System.out.print(values + " ");
+        }
+        System.out.println();
     }
 
 }
