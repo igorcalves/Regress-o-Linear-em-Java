@@ -36,10 +36,11 @@ public class LagrangeInput {
             if (valueOfX.getDoubleValue() != null) {
                 finalValueWithCorrectSignal = valueOfX.getDoubleValue();
                 listY.add(finalValueWithCorrectSignal);
+                c++;
             }
             valueOfX = new x("");
             showList('Y');
-            c++;
+            
             if(c == listX.size()) break;
         }
 

@@ -52,7 +52,7 @@ public class Resolving {
                     auxUpSideList.remove(0);
                 }
             }
-            System.out.println("L(" +i+")"+finalUpSideList);
+            System.out.println("\nL(" +i+")"+finalUpSideList);
             sizeFinalList = finalUpSideList.size() -1 ;
             LnUpSide.addAll(finalUpSideList);
         }
@@ -227,7 +227,7 @@ public class Resolving {
         List<ValorLagrange> auxLnList = new ArrayList<>(lnList);
         for (int ii = 0; ii <= lagrangeListX.size() +1; ii++) {
             if(!auxLnList.isEmpty()){
-                System.out.print("L" + ii + "=  ");
+                System.out.print("\nL" + ii + "=  ");
                 for(int i = 0;i <=sizeFinalList;i++){
                     System.out.print(" " + auxLnList.get(0));
                     auxLnList.remove(0);
@@ -260,6 +260,9 @@ public class Resolving {
 
     public void resolvingLastPart(List<ValorLagrange> lagrangeListX,List<ValorLagrange> lnList){
         List<ValorLagrange> TERMINOOOO = new ArrayList<>();
+
+        List<ValorLagrange> gx = new ArrayList<>();
+        
         List<ValorLagrange> auxLnList = new ArrayList<>(lnList);
 
         int mmc = Math.abs(mmcLista(LnDownSide));
@@ -276,7 +279,21 @@ public class Resolving {
         }
         System.out.println("*****************RESULTADO*****************\n\n");
         sameXType(TERMINOOOO,true);
-        System.out.println("     -------------------\n             " + mmc);
+        System.out.println("     -------------------\n             " + mmc +"\n");
+
+        System.out.print("g(x) = ");
+        for (ValorLagrange valorLagrange : TERMINOOOO) {
+
+            if(valorLagrange.getValor() %mmc == 0){
+                ValorLagrange vl = new ValorLagrange((valorLagrange.getValor() / mmc),
+                valorLagrange.getX());
+                System.out.print(vl + " ");                
+            }else{
+                reduce(valorLagrange.getValor(), mmc,valorLagrange.getX());
+            }            
+            
+        }
+        System.out.println();
     }
 
     private void showList(List<ValorLagrange> listShow){
@@ -285,5 +302,41 @@ public class Resolving {
         }
         System.out.println();
     }
+
+    private void reduce(double upside, double bottom,Integer xPow) {
+
+        int div = 2;
+        while (true) {
+            if (div > upside && div > bottom) {
+                System.out.print(upside + "\\" + bottom + "X" + getPowX(xPow) + " " );
+                break;
+            }
+            if (upside % div == 0 && bottom % div == 0) {
+                upside /= div;
+                bottom /= div;
+            } else {
+                div++;
+            }
+
+        }
+
+    }
+
+    public  String getPowX(int numero) {
+        if(numero == 1){
+            return "";
+        }
+
+		String[] exp = { "⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹" };
+
+		StringBuilder expoente = new StringBuilder();
+		String nStr = String.valueOf(numero);
+		for (char digit : nStr.toCharArray()) {
+			int indice = Character.getNumericValue(digit);
+			expoente.append(exp[indice]);
+		}
+
+		return expoente.toString();
+	}
 
 }
